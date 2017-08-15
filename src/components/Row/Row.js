@@ -8,7 +8,7 @@ function Row({rowIndex}) {
   return (
       <tr className={s.tableRow}>
           <th>{rowIndex + 1}</th>
-          { _.times(10, cellIndex => <Cell key={cellIndex} rowIndex={rowIndex} cellIndex={cellIndex} />) }
+          { _.times(10, cellIndex => <Cell key={cellIndex} rowIndex={rowIndex+1} cellIndex={cellIndex} />) }
       </tr>
   );
 }

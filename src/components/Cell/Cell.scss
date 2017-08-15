@@ -1,5 +1,13 @@
 .cell {
+  box-sizing: border-box;
   border: 1px solid #DADADA;
+  width: 100px;
+  height: 30px;
+}
+
+.selected-cell {
+  box-sizing: border-box;
+  border: 2px solid blue;
   width: 100px;
   height: 30px;
 }
