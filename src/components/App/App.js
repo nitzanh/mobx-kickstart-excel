@@ -4,11 +4,13 @@ import s from './App.scss';
 import Row from '../Row';
 import Header from '../Header';
 import FormulaEditor from '../FormulaEditor';
-import storeAPI from './Store';
+import DevTools from 'mobx-react-devtools';
+
 
 function App() {
   return (
     <div className={s.root}>
+      <DevTools/>
       <FormulaEditor/>
       <table className={s.table}>
         <tbody>

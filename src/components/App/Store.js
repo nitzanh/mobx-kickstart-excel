@@ -3,39 +3,34 @@
  */
 import mobx from 'mobx';
 
-const {observable, action, computed} = mobx;
+const {observable, action} = mobx;
 
-const translateKey = key => `${key.col}${key.row}`;
-
-
-const state = {
+const state = observable.object({
   selected: 'A1',
-  cells: observable.map({A1: {
-    value: 5,
-    isSelected: false
-  }
-  })
-};
+  cells: observable.map(
+    {
+      A1: {
+        get value() {
+          return this.rawData;
+        },
+        rawData: ''
+      }
+    }, 'cells')
+}, 'State');
+
 
 export const storeAPI = {
-  getCell: key => state.cells.get(translateKey(key)),
+  getCell: key => state.cells.get(key),
+  getSelected: () => {
+    return state.selected;
+  },
   setSelected: action(key => {
-    if (state.selected) {
-      const selectedKey = state.selected;
-      state.cells.get(selectedKey).isSelected = false;
-    }
-    state.selected = translateKey(key);
-    if (state.cells.get(translateKey(key))) {
-      const cell = state.cells.get(translateKey(key));
-      cell.isSelected = true;
-    } else {
-      state.cells.set(translateKey(key), {value: '', isSelected: true});
-
-    }
+    state.selected = key;
+    console.log(`${key} was selected`);
   }),
   setFormula: action(value => {
     const selectedCell = state.cells.get(state.selected);
-    selectedCell.value = value;
+    selectedCell.rawData = value;
   })
 };
 
